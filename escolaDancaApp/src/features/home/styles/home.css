@@ -1,0 +1,26 @@
+.home-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.home-header {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+}
+
+.home-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+.home-main {
+  padding: 8px 0;
+}
+
+.home-greeting {
+  font-size: 1.25rem;
+  font-weight: 500;
+}

@@ -1,0 +1,37 @@
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 16px;
+  border-bottom: 1px solid #ccc;
+  background-color: #08457b;
+  height: 80px;
+}
+
+.header-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+  flex: 1;
+  text-align: left;
+}
+
+.header-back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  padding-right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.arrow-left {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-left: 3px solid #2563eb;
+  border-bottom: 3px solid #2563eb;
+  transform: rotate(45deg);
+}

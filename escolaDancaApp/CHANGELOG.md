@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [SNAPSHOT]
 
+## [0.0.11] - 31 Mar. 2026
+
+### Added
+
+- Adicionando rota pra tela de pagamentos
+- Adicionando rota pra tela de conta
+
 ## [0.0.10] - 31 Mar. 2026
 
 ### Added

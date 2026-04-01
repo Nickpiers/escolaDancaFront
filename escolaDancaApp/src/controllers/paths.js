@@ -4,4 +4,5 @@ export const paths = {
   userAvisos: "/user/avisos",
   userDetalhesAvisos: "/user/avisos/detalhes",
   userPagamentos: "/user/pagamentos",
+  userPerfil: "/user/perfil",
 };

@@ -8,6 +8,7 @@ import { AppLayout } from "./features/common/components/AppLayout";
 import { Avisos } from "./features/avisos/components/Avisos";
 import { DetalhesAvisos } from "./features/avisos/components/DetalhesAvisos";
 import { Pagamentos } from "./features/pagamentos/components/Pagamentos";
+import { Perfil } from "./features/perfil/components/Perfil";
 
 export const EscolaDancaApp = () => {
   return (
@@ -23,6 +24,7 @@ export const EscolaDancaApp = () => {
               <Route path={paths.userHome} element={<Home />} />
               <Route path={paths.userAvisos} element={<Avisos />} />
               <Route path={paths.userPagamentos} element={<Pagamentos />} />
+              <Route path={paths.userPerfil} element={<Perfil />} />
             </Route>
             {/* Grupo com PrivateRoute sem BottomNavBar */}
             <Route

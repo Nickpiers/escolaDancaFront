@@ -4,3 +4,9 @@ export const formatarAvisoDiaMes = (dataISO) => {
   const [ano, mes, dia] = dataISO.split("-");
   return `${dia}/${mes}`;
 };
+
+export const formatarAvisoDataCompleta = (dataISO) => {
+  if (!dataISO) return "";
+  const [ano, mes, dia] = dataISO.split("-");
+  return `${dia}/${mes}/${ano}`;
+};

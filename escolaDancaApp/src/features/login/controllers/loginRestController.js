@@ -7,7 +7,7 @@ export const loginUsuario = async ({
   saveAluno,
   saveUsuario,
   saveToken,
-  saveEventos,
+  saveAvisos,
 }) => {
   try {
     const result = await restRequest("/auth/login", {
@@ -21,9 +21,9 @@ export const loginUsuario = async ({
     scheduleTokenCheck();
 
     const alunoInfo = await alunoInitialInfo(cpf);
-    const eventosInfo = await eventosList();
+    const avisosInfo = await avisosList();
     saveAluno(alunoInfo.data);
-    saveEventos(eventosInfo.data);
+    saveAvisos(avisosInfo.data);
 
     return result;
   } catch (error) {
@@ -48,7 +48,7 @@ const alunoInitialInfo = async (cpf) => {
   }
 };
 
-const eventosList = async () => {
+const avisosList = async () => {
   try {
     const result = await restRequest("/api/evento/listar", {
       method: "GET",

@@ -4,7 +4,7 @@ import { loginUsuario } from "../controllers/loginRestController";
 import { useUser } from "../../../UserContext";
 
 export const useHandleLogin = (senha) => {
-  const { saveToken, saveUsuario, saveAluno, saveEventos } = useUser();
+  const { saveToken, saveUsuario, saveAluno, saveAvisos } = useUser();
   const { data, error, loading, request } = useRestRequest();
   const [cpf, setCpf] = useState("");
   const [cpfFormatted, setCpfFormatted] = useState("");
@@ -35,7 +35,7 @@ export const useHandleLogin = (senha) => {
         saveAluno,
         saveUsuario,
         saveToken,
-        saveEventos,
+        saveAvisos,
       }),
     );
   };

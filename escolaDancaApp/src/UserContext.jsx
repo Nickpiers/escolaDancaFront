@@ -13,14 +13,15 @@ export const UserProvider = ({ children }) => {
       return null;
     }
   });
-  const [eventos, setEventos] = useState(() => {
-    const storedEventos = localStorage.getItem("eventos");
+  const [avisos, setAvisos] = useState(() => {
+    const storedAvisos = localStorage.getItem("avisos");
     try {
-      return storedEventos ? JSON.parse(storedEventos) : null;
+      return storedAvisos ? JSON.parse(storedAvisos) : null;
     } catch {
       return null;
     }
   });
+  const [avisoSelecionado, setAvisoSelecionado] = useState(null);
 
   const saveToken = (newToken) => {
     setToken(newToken);
@@ -37,34 +38,40 @@ export const UserProvider = ({ children }) => {
     localStorage.setItem("aluno", JSON.stringify(newAluno));
   };
 
-  const saveEventos = (newEventos) => {
-    setEventos(newEventos);
-    localStorage.setItem("eventos", JSON.stringify(newEventos));
+  const saveAvisos = (newAvisos) => {
+    setAvisos(newAvisos);
+    localStorage.setItem("avisos", JSON.stringify(newAvisos));
   };
 
   const clearUserData = () => {
     setToken(null);
     setUsuario(null);
     setAluno(null);
-    setEventos(null);
+    setAvisos(null);
     localStorage.removeItem("token");
     localStorage.removeItem("usuario");
     localStorage.removeItem("aluno");
-    localStorage.removeItem("eventos");
+    localStorage.removeItem("avisos");
   };
 
   return (
     <UserContext.Provider
       value={{
+        // Infos Essenciais
         token,
         usuario,
         aluno,
-        eventos,
+        avisos,
         saveToken,
         saveUsuario,
         saveAluno,
-        saveEventos,
+        saveAvisos,
         clearUserData,
+        // Infos Essenciais
+
+        // Infos Utilitarias
+        avisoSelecionado,
+        setAvisoSelecionado,
       }}
     >
       {children}

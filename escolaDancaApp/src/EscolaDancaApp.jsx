@@ -7,6 +7,7 @@ import { UserProvider } from "./UserContext";
 import { AppLayout } from "./features/common/components/AppLayout";
 import { Avisos } from "./features/avisos/components/Avisos";
 import { DetalhesAvisos } from "./features/avisos/components/DetalhesAvisos";
+import { Pagamentos } from "./features/pagamentos/components/Pagamentos";
 
 export const EscolaDancaApp = () => {
   return (
@@ -21,6 +22,7 @@ export const EscolaDancaApp = () => {
             <Route element={<AppLayout />}>
               <Route path={paths.userHome} element={<Home />} />
               <Route path={paths.userAvisos} element={<Avisos />} />
+              <Route path={paths.userPagamentos} element={<Pagamentos />} />
             </Route>
             {/* Grupo com PrivateRoute sem BottomNavBar */}
             <Route

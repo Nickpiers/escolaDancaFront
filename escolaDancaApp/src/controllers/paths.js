@@ -3,4 +3,5 @@ export const paths = {
   userHome: "/user/home",
   userAvisos: "/user/avisos",
   userDetalhesAvisos: "/user/avisos/detalhes",
+  userPagamentos: "/user/pagamentos",
 };

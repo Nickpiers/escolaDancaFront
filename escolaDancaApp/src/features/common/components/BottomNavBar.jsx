@@ -33,8 +33,8 @@ export const BottomNavBar = () => {
         </button>
 
         <button
-          // onClick={() => mudarPath(paths.userHome)}
-          className={classNameButton()}
+          onClick={() => mudarPath(paths.userPagamentos)}
+          className={classNameButton(paths.userPagamentos)}
         >
           <CreditCardIcon className="h-6 w-6" />
           <span className="text-xs">Pag.</span>

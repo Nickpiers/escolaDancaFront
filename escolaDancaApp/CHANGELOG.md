@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [SNAPSHOT]
 
+## [0.0.10] - 31 Mar. 2026
+
+### Added
+
+- Adicionando tela de Detalhes de Avisos
+
 ## [0.0.9] - 30 Mar. 2026
 
 ### Added

@@ -1,18 +1,26 @@
+import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../UserContext.jsx";
 import { Card } from "../../common/components/Card.jsx";
 import { Header } from "../../common/components/Header.jsx";
 // prettier-ignore
 import { filterProximoEvento, formatarVencimentoDiaMes } from "../controllers/homeController.js";
 import "../styles/home.css";
+import { paths } from "../../../controllers/paths.js";
 
 export const Home = () => {
-  const { aluno, eventos } = useUser();
+  const navigate = useNavigate();
+  const { aluno, avisos, setAvisoSelecionado } = useUser();
 
   const { nome, ultimaCobranca } = aluno;
   const proximaCobranca = ultimaCobranca.cobrancas[0];
 
-  const { eventos: eventosList, idProximoEvento } = eventos || {};
+  const { eventos: eventosList, idProximoEvento } = avisos || {};
   const proximoEvento = filterProximoEvento(eventosList, idProximoEvento);
+
+  const mostrarDetalhesAviso = () => {
+    setAvisoSelecionado(proximoEvento);
+    navigate(paths.userDetalhesAvisos);
+  };
 
   return (
     <>
@@ -43,7 +51,9 @@ export const Home = () => {
                 <p className="text-black font-medium mb-2">
                   {proximoEvento.nome}
                 </p>
-                <p className="text-gray-600">Toque para ver detalhes</p>
+                <p className="text-gray-600" onClick={mostrarDetalhesAviso}>
+                  Toque para ver detalhes
+                </p>
               </>
             ) : (
               <p className="text-gray-500">Sem novos avisos!</p>

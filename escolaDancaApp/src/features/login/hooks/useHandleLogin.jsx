@@ -6,8 +6,8 @@ import { useUser } from "../../../UserContext";
 export const useHandleLogin = (senha) => {
   const {
     saveToken,
+    saveTipoUsuario,
     saveUsuario,
-    saveAluno,
     saveAvisos,
     saveCobrancas,
     clearUserData,
@@ -39,9 +39,9 @@ export const useHandleLogin = (senha) => {
       loginUsuario({
         cpf,
         senha,
-        saveAluno,
-        saveUsuario,
         saveToken,
+        saveTipoUsuario,
+        saveUsuario,
         saveAvisos,
         saveCobrancas,
       }),

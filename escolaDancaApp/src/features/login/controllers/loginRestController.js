@@ -4,9 +4,9 @@ import { scheduleTokenCheck } from "../../../controllers/scheduleTokenCheck";
 export const loginUsuario = async ({
   cpf,
   senha,
-  saveAluno,
-  saveUsuario,
   saveToken,
+  saveTipoUsuario,
+  saveUsuario,
   saveAvisos,
   saveCobrancas,
 }) => {
@@ -19,17 +19,17 @@ export const loginUsuario = async ({
     const {
       token,
       tipoUsuario,
-      aluno,
+      usuario,
       eventos: avisos,
       cobrancas,
     } = result.data;
 
     saveToken(token);
-    saveUsuario(tipoUsuario);
+    saveTipoUsuario(tipoUsuario);
+    saveUsuario(usuario);
     saveAvisos(avisos);
 
     if (tipoUsuario === "ALUNO") {
-      saveAluno(aluno);
       saveCobrancas(cobrancas);
     }
 

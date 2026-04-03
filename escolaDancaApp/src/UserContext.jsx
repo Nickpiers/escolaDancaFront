@@ -4,11 +4,13 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
-  const [usuario, setUsuario] = useState(() => localStorage.getItem("usuario"));
-  const [aluno, setAluno] = useState(() => {
-    const storedAluno = localStorage.getItem("aluno");
+  const [tipoUsuario, setTipoUsuario] = useState(() =>
+    localStorage.getItem("tipoUsuario"),
+  );
+  const [usuario, setUsuario] = useState(() => {
+    const storedUsuario = localStorage.getItem("usuario");
     try {
-      return storedAluno ? JSON.parse(storedAluno) : null;
+      return storedUsuario ? JSON.parse(storedUsuario) : null;
     } catch {
       return null;
     }
@@ -36,14 +38,14 @@ export const UserProvider = ({ children }) => {
     localStorage.setItem("token", newToken);
   };
 
-  const saveUsuario = (newUsuario) => {
-    setUsuario(newUsuario);
-    localStorage.setItem("usuario", newUsuario);
+  const saveTipoUsuario = (newTipoUsuario) => {
+    setTipoUsuario(newTipoUsuario);
+    localStorage.setItem("tipoUsuario", newTipoUsuario);
   };
 
-  const saveAluno = (newAluno) => {
-    setAluno(newAluno);
-    localStorage.setItem("aluno", JSON.stringify(newAluno));
+  const saveUsuario = (newUsuario) => {
+    setUsuario(newUsuario);
+    localStorage.setItem("usuario", JSON.stringify(newUsuario));
   };
 
   const saveAvisos = (newAvisos) => {
@@ -58,13 +60,13 @@ export const UserProvider = ({ children }) => {
 
   const clearUserData = () => {
     setToken(null);
+    saveTipoUsuario(null);
     setUsuario(null);
-    setAluno(null);
     setAvisos(null);
     setCobrancas(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("tipoUsuario");
     localStorage.removeItem("usuario");
-    localStorage.removeItem("aluno");
     localStorage.removeItem("avisos");
     localStorage.removeItem("cobrancas");
   };
@@ -74,13 +76,13 @@ export const UserProvider = ({ children }) => {
       value={{
         // Infos Essenciais
         token,
+        tipoUsuario,
         usuario,
-        aluno,
         avisos,
         cobrancas,
         saveToken,
+        saveTipoUsuario,
         saveUsuario,
-        saveAluno,
         saveAvisos,
         saveCobrancas,
         clearUserData,

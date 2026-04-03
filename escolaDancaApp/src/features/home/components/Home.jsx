@@ -9,7 +9,7 @@ import { paths } from "../../../controllers/paths.js";
 
 export const Home = () => {
   const navigate = useNavigate();
-  const { aluno, cobrancas, avisos, setAvisoSelecionado } = useUser();
+  const { usuario, cobrancas, avisos, setAvisoSelecionado } = useUser();
 
   const proximaCobranca = filterProximaCobranca(cobrancas);
 
@@ -34,7 +34,7 @@ export const Home = () => {
       <Header />
       <div className="home-container">
         <main className="home-main">
-          <p className="home-greeting mb-3">Olá {aluno.nome}!</p>
+          <p className="home-greeting mb-3">Olá {usuario.nome}!</p>
           <Card>
             <h2 className="text-lg font-semibold mb-2">Pagamentos</h2>
             <p className="bg-yellow-300 text-black font-medium px-3 py-2 rounded-2xl mb-4">

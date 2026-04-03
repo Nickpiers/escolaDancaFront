@@ -8,6 +8,7 @@ export const loginUsuario = async ({
   saveUsuario,
   saveToken,
   saveAvisos,
+  saveCobrancas,
 }) => {
   try {
     const result = await restRequest("/auth/login", {
@@ -15,15 +16,24 @@ export const loginUsuario = async ({
       body: JSON.stringify({ cpf, senha }),
     });
 
-    saveToken(result.data.token);
-    saveUsuario(result.data.tipoUsuario);
+    const {
+      token,
+      tipoUsuario,
+      aluno,
+      eventos: avisos,
+      cobrancas,
+    } = result.data;
+
+    saveToken(token);
+    saveUsuario(tipoUsuario);
+    saveAvisos(avisos);
+
+    if (tipoUsuario === "ALUNO") {
+      saveAluno(aluno);
+      saveCobrancas(cobrancas);
+    }
 
     scheduleTokenCheck();
-
-    const alunoInfo = await alunoInitialInfo(cpf);
-    const avisosInfo = await avisosList();
-    saveAluno(alunoInfo.data);
-    saveAvisos(avisosInfo.data);
 
     return result;
   } catch (error) {
@@ -32,31 +42,5 @@ export const loginUsuario = async ({
     if (error.status == 400) message = "Credenciais inválidas";
     else message = "Erro inesperado. Tente novamente mais tarde.";
     throw new Error(message);
-  }
-};
-
-const alunoInitialInfo = async (cpf) => {
-  try {
-    const result = await restRequest(`/api/aluno/consultar/${cpf}`, {
-      method: "GET",
-    });
-
-    return result;
-  } catch (error) {
-    console.error("Erro ao consultar informaçoes do aluno:", error.message);
-    throw new Error("Erro inesperado. Tente novamente mais tarde.");
-  }
-};
-
-const avisosList = async () => {
-  try {
-    const result = await restRequest("/api/evento/listar", {
-      method: "GET",
-    });
-
-    return result;
-  } catch (error) {
-    console.error("Erro ao consultar lista de eventos:", error.message);
-    throw new Error("Erro inesperado. Tente novamente mais tarde.");
   }
 };

@@ -13,7 +13,10 @@ export const Login = () => {
 
   useEffect(() => {
     if (data?.token && !error) {
-      navigate(paths.userHome);
+      const { tipoUsuario } = data;
+      tipoUsuario === "ALUNO"
+        ? navigate(paths.userHome)
+        : console.warn("Tipo de usuário:", tipoUsuario);
     }
   }, [data, error, navigate]);
 

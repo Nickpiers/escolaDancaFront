@@ -4,7 +4,14 @@ import { loginUsuario } from "../controllers/loginRestController";
 import { useUser } from "../../../UserContext";
 
 export const useHandleLogin = (senha) => {
-  const { saveToken, saveUsuario, saveAluno, saveAvisos } = useUser();
+  const {
+    saveToken,
+    saveUsuario,
+    saveAluno,
+    saveAvisos,
+    saveCobrancas,
+    clearUserData,
+  } = useUser();
   const { data, error, loading, request } = useRestRequest();
   const [cpf, setCpf] = useState("");
   const [cpfFormatted, setCpfFormatted] = useState("");
@@ -36,12 +43,14 @@ export const useHandleLogin = (senha) => {
         saveUsuario,
         saveToken,
         saveAvisos,
+        saveCobrancas,
       }),
     );
   };
 
   useEffect(() => {
-    localStorage.removeItem("token");
+    clearUserData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { data, error, loading, cpfFormatted, alterarCpf, confirmarLogin };

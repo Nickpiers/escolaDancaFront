@@ -21,6 +21,14 @@ export const UserProvider = ({ children }) => {
       return null;
     }
   });
+  const [cobrancas, setCobrancas] = useState(() => {
+    const storedCobrancas = localStorage.getItem("cobrancas");
+    try {
+      return storedCobrancas ? JSON.parse(storedCobrancas) : null;
+    } catch {
+      return null;
+    }
+  });
   const [avisoSelecionado, setAvisoSelecionado] = useState(null);
 
   const saveToken = (newToken) => {
@@ -43,15 +51,22 @@ export const UserProvider = ({ children }) => {
     localStorage.setItem("avisos", JSON.stringify(newAvisos));
   };
 
+  const saveCobrancas = (newCobrancas) => {
+    setCobrancas(newCobrancas);
+    localStorage.setItem("cobrancas", JSON.stringify(newCobrancas));
+  };
+
   const clearUserData = () => {
     setToken(null);
     setUsuario(null);
     setAluno(null);
     setAvisos(null);
+    setCobrancas(null);
     localStorage.removeItem("token");
     localStorage.removeItem("usuario");
     localStorage.removeItem("aluno");
     localStorage.removeItem("avisos");
+    localStorage.removeItem("cobrancas");
   };
 
   return (
@@ -62,10 +77,12 @@ export const UserProvider = ({ children }) => {
         usuario,
         aluno,
         avisos,
+        cobrancas,
         saveToken,
         saveUsuario,
         saveAluno,
         saveAvisos,
+        saveCobrancas,
         clearUserData,
         // Infos Essenciais
 

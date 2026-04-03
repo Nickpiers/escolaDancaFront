@@ -1,5 +1,10 @@
 import "../styles/card.css";
 
-export const Card = ({ children }) => {
-  return <div className="card-container">{children}</div>;
+export const Card = ({ children, className }) => {
+  const bgColorClass = className ? "" : "bg-white";
+  return (
+    <div className={`card-container ${bgColorClass} ${className || ""}`}>
+      {children}
+    </div>
+  );
 };

@@ -1,11 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import { Card } from "../../common/components/Card";
 // prettier-ignore
 import { formatarVencDiaMes, formataValor } from "../controller/pagamentosController";
+import { paths } from "../../../controllers/paths";
 
 export const CardsPagamentosEmAberto = ({ cobrancasEmAberto }) => {
+  const navigate = useNavigate();
+
   if (!cobrancasEmAberto || cobrancasEmAberto.length === 0) {
     return <p>Tudo em dia por aqui! :D</p>;
   }
+
+  const aoPagarAgora = () => {
+    navigate(paths.userPagamentosEfetivar);
+  };
 
   const renderizrCards = () => {
     return (
@@ -44,6 +52,7 @@ export const CardsPagamentosEmAberto = ({ cobrancasEmAberto }) => {
               <button
                 className="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition
                 bg-rose-500 text-white"
+                onClick={aoPagarAgora}
               >
                 Pagar boleto
               </button>

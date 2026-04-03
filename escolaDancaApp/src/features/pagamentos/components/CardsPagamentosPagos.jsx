@@ -1,11 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import { Card } from "../../common/components/Card";
 // prettier-ignore
 import { formatarVencDiaMes, formataValor } from "../controller/pagamentosController";
+import { paths } from "../../../controllers/paths";
 
 export const CardsPagamentosPagos = ({ cobrancasPagas }) => {
+  const navigate = useNavigate();
+
   if (!cobrancasPagas || cobrancasPagas.length === 0) {
     return <p>Sem cobranças pagas por enquanto! :D</p>;
   }
+
+  const aoVerComprovante = () => {
+    navigate(paths.userPagamentosComprovante);
+  };
 
   const renderizrCards = () => {
     return (
@@ -37,6 +45,7 @@ export const CardsPagamentosPagos = ({ cobrancasPagas }) => {
               <button
                 className="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition
                     bg-green-800 text-white"
+                onClick={aoVerComprovante}
               >
                 Comprovante
               </button>

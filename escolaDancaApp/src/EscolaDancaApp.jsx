@@ -9,6 +9,8 @@ import { Avisos } from "./features/avisos/components/Avisos";
 import { DetalhesAvisos } from "./features/avisos/components/DetalhesAvisos";
 import { Pagamentos } from "./features/pagamentos/components/Pagamentos";
 import { Perfil } from "./features/perfil/components/Perfil";
+import { PagamentosEfetivar } from "./features/pagamentos/components/PagamentosEfetivar";
+import { PagamentosComprovante } from "./features/pagamentos/components/PagamentosComprovante";
 
 export const EscolaDancaApp = () => {
   return (
@@ -30,6 +32,14 @@ export const EscolaDancaApp = () => {
             <Route
               path={paths.userDetalhesAvisos}
               element={<DetalhesAvisos />}
+            />
+            <Route
+              path={paths.userPagamentosEfetivar}
+              element={<PagamentosEfetivar />}
+            />
+            <Route
+              path={paths.userPagamentosComprovante}
+              element={<PagamentosComprovante />}
             />
           </Route>
         </Routes>

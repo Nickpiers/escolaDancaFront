@@ -3,16 +3,15 @@ import { useUser } from "../../../UserContext.jsx";
 import { Card } from "../../common/components/Card.jsx";
 import { Header } from "../../common/components/Header.jsx";
 // prettier-ignore
-import { filterProximoEvento, formatarVencimentoDiaMes } from "../controllers/homeController.js";
+import { filterProximaCobranca, filterProximoEvento, formatarVencimentoDiaMes } from "../controllers/homeController.js";
 import "../styles/home.css";
 import { paths } from "../../../controllers/paths.js";
 
 export const Home = () => {
   const navigate = useNavigate();
-  const { aluno, avisos, setAvisoSelecionado } = useUser();
+  const { aluno, cobrancas, avisos, setAvisoSelecionado } = useUser();
 
-  const { nome, ultimaCobranca } = aluno;
-  const proximaCobranca = ultimaCobranca.cobrancas[0];
+  const proximaCobranca = filterProximaCobranca(cobrancas);
 
   const { eventos: eventosList, idProximoEvento } = avisos || {};
   const proximoEvento = filterProximoEvento(eventosList, idProximoEvento);
@@ -27,7 +26,7 @@ export const Home = () => {
       <Header />
       <div className="home-container">
         <main className="home-main">
-          <p className="home-greeting mb-3">Olá {nome}!</p>
+          <p className="home-greeting mb-3">Olá {aluno.nome}!</p>
           <Card>
             <h2 className="text-lg font-semibold mb-2">Pagamentos</h2>
             <p className="bg-yellow-300 text-black font-medium px-3 py-2 rounded-2xl mb-4">

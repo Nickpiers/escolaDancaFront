@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [SNAPSHOT]
 
+## [0.0.12] - 03 Abr. 2026
+
+### Added
+
+- Adaptando chamada de login
+
 ## [0.0.11] - 31 Mar. 2026
 
 ### Added

@@ -36,6 +36,7 @@ export const Avisos = () => {
     <>
       <Header />
       <main className="avisos-container">
+        <p className="text-2xl font-medium mb-3">📅 Avisos</p>
         {eventosList ? renderAvisos() : <h1>Sem novos avisos! :D</h1>}
       </main>
     </>

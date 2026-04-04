@@ -7,7 +7,7 @@ import { Header } from "../../common/components/Header";
 import { CardsPagamentosPagos } from "./CardsPagamentosPagos";
 
 export const Pagamentos = () => {
-  const { cobrancas } = useUser();
+  const { cobrancas, setCobrancaSelecionada } = useUser();
   const [statusPagamentos, setStatusPagamentos] =
     useState(PAGAMENTOS_EM_ABERTO);
 
@@ -49,9 +49,15 @@ export const Pagamentos = () => {
       <main className="max-w-[800px] mx-auto p-6">
         {botoesEmAbertoPago()}
         {isEmAberto ? (
-          <CardsPagamentosEmAberto cobrancasEmAberto={cobrancas.cobrancas} />
+          <CardsPagamentosEmAberto
+            cobrancasEmAberto={cobrancas.cobrancasEmAberto}
+            setCobrancaSelecionada={setCobrancaSelecionada}
+          />
         ) : (
-          <CardsPagamentosPagos cobrancasPagas={cobrancas.cobrancas} />
+          <CardsPagamentosPagos
+            cobrancasPagas={cobrancas.cobrancasPagas}
+            setCobrancaSelecionada={setCobrancaSelecionada}
+          />
         )}
       </main>
     </>

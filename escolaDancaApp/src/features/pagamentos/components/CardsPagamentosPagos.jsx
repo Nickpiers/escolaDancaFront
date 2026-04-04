@@ -4,23 +4,27 @@ import { Card } from "../../common/components/Card";
 import { formatarVencDiaMes, formataValor } from "../controller/pagamentosController";
 import { paths } from "../../../controllers/paths";
 
-export const CardsPagamentosPagos = ({ cobrancasPagas }) => {
+export const CardsPagamentosPagos = ({
+  cobrancasPagas,
+  setCobrancaSelecionada,
+}) => {
   const navigate = useNavigate();
 
   if (!cobrancasPagas || cobrancasPagas.length === 0) {
     return <p>Sem cobranças pagas por enquanto! :D</p>;
   }
 
-  const aoVerComprovante = () => {
+  const aoVerComprovante = (index) => {
+    setCobrancaSelecionada(cobrancasPagas[index]);
     navigate(paths.userPagamentosComprovante);
   };
 
   const renderizrCards = () => {
     return (
       <div className="space-y-4">
-        {cobrancasPagas.map((cobranca) => (
+        {cobrancasPagas.map((cobranca, index) => (
           <Card
-            key={cobranca.id}
+            key={index}
             className="flex flex-row items-center justify-between gap-4 p-4 rounded-xl bg-green-500 border border-green-200 shadow-sm transition-shadow"
           >
             <div className="flex-1 my-2 min-w-0">
@@ -45,7 +49,7 @@ export const CardsPagamentosPagos = ({ cobrancasPagas }) => {
               <button
                 className="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition
                     bg-green-800 text-white"
-                onClick={aoVerComprovante}
+                onClick={() => aoVerComprovante(index)}
               >
                 Comprovante
               </button>

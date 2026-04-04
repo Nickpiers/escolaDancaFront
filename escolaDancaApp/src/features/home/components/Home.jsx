@@ -2,16 +2,21 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../UserContext.jsx";
 import { Card } from "../../common/components/Card.jsx";
 import { Header } from "../../common/components/Header.jsx";
-// prettier-ignore
-import { filterProximaCobranca, filterProximoEvento, formatarVencimentoDiaMes } from "../controllers/homeController.js";
-import "../styles/home.css";
+
+import { filterProximoEvento } from "../controllers/homeController.js";
 import { paths } from "../../../controllers/paths.js";
+import { CardCobrancaHome } from "./CardCobrancaHome.jsx";
+import "../styles/home.css";
 
 export const Home = () => {
   const navigate = useNavigate();
-  const { usuario, cobrancas, avisos, setAvisoSelecionado } = useUser();
-
-  const proximaCobranca = filterProximaCobranca(cobrancas);
+  const {
+    usuario,
+    cobrancas,
+    avisos,
+    setAvisoSelecionado,
+    setCobrancaSelecionada,
+  } = useUser();
 
   const { eventos: eventosList, idProximoEvento } = avisos || {};
   const proximoEvento = filterProximoEvento(eventosList, idProximoEvento);
@@ -21,42 +26,17 @@ export const Home = () => {
     navigate(paths.userDetalhesAvisos);
   };
 
-  const aoPagarAgora = () => {
-    navigate(paths.userPagamentosEfetivar);
-  };
-
-  const aoVerTodos = () => {
-    navigate(paths.userPagamentos, { replace: true });
-  };
-
   return (
     <>
       <Header />
       <div className="home-container">
         <main className="home-main">
           <p className="home-greeting mb-3">Olá {usuario.nome}!</p>
-          <Card>
-            <h2 className="text-lg font-semibold mb-2">Pagamentos</h2>
-            <p className="bg-yellow-300 text-black font-medium px-3 py-2 rounded-2xl mb-4">
-              Vencimento em{" "}
-              {formatarVencimentoDiaMes(proximaCobranca.vencimento)}
-            </p>
-            <div className="flex gap-4">
-              <button
-                className="flex-1 bg-red-600 text-white font-semibold px-4 py-2 rounded-2xl"
-                onClick={aoPagarAgora}
-              >
-                Pagar agora
-              </button>
-              <button
-                className="flex-1 bg-blue-900 text-white font-semibold px-4 py-2 rounded-2xl"
-                onClick={aoVerTodos}
-              >
-                Ver todos
-              </button>
-            </div>
-          </Card>
-
+          <CardCobrancaHome
+            cobrancas={cobrancas}
+            navigate={navigate}
+            setCobrancaSelecionada={setCobrancaSelecionada}
+          />
           <Card>
             <h2 className="text-lg font-semibold mb-2">Avisos & Novidades</h2>
             {proximoEvento ? (

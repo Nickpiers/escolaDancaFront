@@ -32,6 +32,7 @@ export const UserProvider = ({ children }) => {
     }
   });
   const [avisoSelecionado, setAvisoSelecionado] = useState(null);
+  const [cobrancaSelecionada, setCobrancaSelecionada] = useState(null);
 
   const saveToken = (newToken) => {
     setToken(newToken);
@@ -91,6 +92,8 @@ export const UserProvider = ({ children }) => {
         // Infos Utilitarias
         avisoSelecionado,
         setAvisoSelecionado,
+        cobrancaSelecionada,
+        setCobrancaSelecionada,
       }}
     >
       {children}

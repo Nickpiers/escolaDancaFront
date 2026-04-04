@@ -4,23 +4,27 @@ import { Card } from "../../common/components/Card";
 import { formatarVencDiaMes, formataValor } from "../controller/pagamentosController";
 import { paths } from "../../../controllers/paths";
 
-export const CardsPagamentosEmAberto = ({ cobrancasEmAberto }) => {
+export const CardsPagamentosEmAberto = ({
+  cobrancasEmAberto,
+  setCobrancaSelecionada,
+}) => {
   const navigate = useNavigate();
 
   if (!cobrancasEmAberto || cobrancasEmAberto.length === 0) {
     return <p>Tudo em dia por aqui! :D</p>;
   }
 
-  const aoPagarAgora = () => {
+  const aoPagarAgora = (index) => {
+    setCobrancaSelecionada(cobrancasEmAberto[index]);
     navigate(paths.userPagamentosEfetivar);
   };
 
   const renderizrCards = () => {
     return (
       <div className="space-y-4">
-        {cobrancasEmAberto.map((cobranca) => (
+        {cobrancasEmAberto.map((cobranca, index) => (
           <Card
-            key={cobranca.id}
+            key={index}
             className="flex flex-row items-center justify-between gap-4 p-4 rounded-xl bg-white border border-gray-100 shadow-sm transition-shadow"
           >
             <div className="flex-1 my-2 min-w-0">
@@ -52,7 +56,7 @@ export const CardsPagamentosEmAberto = ({ cobrancasEmAberto }) => {
               <button
                 className="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition
                 bg-rose-500 text-white"
-                onClick={aoPagarAgora}
+                onClick={() => aoPagarAgora(index)}
               >
                 Pagar boleto
               </button>

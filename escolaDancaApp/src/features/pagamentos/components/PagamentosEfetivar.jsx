@@ -1,8 +1,12 @@
-import { mascararCPF } from "../../../controllers/commonController";
+// prettier-ignore
+import { formatarDataCompleta, formataValor, mascararCPF } from "../../../controllers/commonController";
+import { useUser } from "../../../UserContext";
 import { Card } from "../../common/components/Card";
 import { Header } from "../../common/components/Header";
 
 export const PagamentosEfetivar = () => {
+  const { usuario, cobrancaSelecionada } = useUser();
+
   const renderizarInfos = (titulo, valor) => (
     <div className="flex items-center gap-2">
       <span className="font-medium text-gray-700">{titulo}</span>
@@ -19,11 +23,17 @@ export const PagamentosEfetivar = () => {
             Pagamento Boleto
           </h1>
           <div className="space-y-2">
-            {renderizarInfos("CPF:", mascararCPF("12345678900"))}
-            {renderizarInfos("Nome:", "John Doe")}
-            {renderizarInfos("Email:", "local@example.com")}
-            {renderizarInfos("Valor total:", "R$ 1.200,00")}
-            {renderizarInfos("Vencimento:", "01/01/2023")}
+            {renderizarInfos("CPF:", mascararCPF(usuario.cpf))}
+            {renderizarInfos("Nome:", usuario.nome)}
+            {renderizarInfos("Email:", usuario.email)}
+            {renderizarInfos(
+              "Valor total:",
+              formataValor(cobrancaSelecionada.totalCobranca),
+            )}
+            {renderizarInfos(
+              "Vencimento:",
+              formatarDataCompleta(cobrancaSelecionada.vencimento),
+            )}
           </div>
         </Card>
       </main>

@@ -50,7 +50,7 @@ export const Login = () => {
         >
           {loading ? "Entrando..." : "Entrar"}
         </button>
-        <button className="login-button register">Registrar</button>
+        {/* <button className="login-button register">Registrar</button> */}
       </div>
     </div>
   );

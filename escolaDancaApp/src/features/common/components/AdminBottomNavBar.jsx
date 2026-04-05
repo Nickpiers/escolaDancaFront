@@ -1,10 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-// prettier-ignore
-import { HomeIcon, CreditCardIcon, CalendarIcon, BellIcon, UserIcon } from "@heroicons/react/24/outline";
+import { HomeIcon, UserIcon } from "@heroicons/react/24/outline";
 import { paths } from "../../../controllers/paths";
 
-export const BottomNavBar = () => {
+export const AdminBottomNavBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -25,35 +24,11 @@ export const BottomNavBar = () => {
     <nav className="fixed bottom-0 w-full bg-white shadow-md border-t border-gray-200">
       <div className="flex justify-around py-2">
         <button
-          onClick={() => mudarPath(paths.userHome)}
-          className={classNameButton(paths.userHome)}
+          onClick={() => mudarPath(paths.adminHome)}
+          className={classNameButton(paths.adminHome)}
         >
           <HomeIcon className="h-6 w-6" />
           <span className="text-xs">Home</span>
-        </button>
-
-        <button
-          onClick={() => mudarPath(paths.userPagamentos)}
-          className={classNameButton(paths.userPagamentos)}
-        >
-          <CreditCardIcon className="h-6 w-6" />
-          <span className="text-xs">Pag.</span>
-        </button>
-
-        {/* <button
-          onClick={() => mudarPath(paths.userHome)}
-          className={classNameButton()}
-        >
-          <CalendarIcon className="h-6 w-6" />
-          <span className="text-xs">Grade</span>
-        </button> */}
-
-        <button
-          onClick={() => mudarPath(paths.userAvisos)}
-          className={classNameButton(paths.userAvisos)}
-        >
-          <BellIcon className="h-6 w-6" />
-          <span className="text-xs">Avisos</span>
         </button>
 
         <button

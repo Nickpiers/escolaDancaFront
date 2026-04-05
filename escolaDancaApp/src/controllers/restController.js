@@ -18,7 +18,10 @@ export const restRequest = async (endpoint, options = {}) => {
 
     const json = await response.json();
 
-    if (response.ok && json.status === 200 && json.type === "OK") {
+    if (
+      response.ok &&
+      (json.type === "OK" || [200, 201, 204].includes(json.status))
+    ) {
       return {
         data: json.data,
         message: json.message,

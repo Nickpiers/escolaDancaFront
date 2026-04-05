@@ -16,7 +16,7 @@ export const Login = () => {
       const { tipoUsuario } = data;
       tipoUsuario === "ALUNO"
         ? navigate(paths.userHome)
-        : console.warn("Tipo de usuário:", tipoUsuario);
+        : navigate(paths.adminHome);
     }
   }, [data, error, navigate]);
 

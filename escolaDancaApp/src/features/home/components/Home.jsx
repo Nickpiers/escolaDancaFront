@@ -31,7 +31,9 @@ export const Home = () => {
       <Header />
       <div className="home-container">
         <main className="home-main">
-          <p className="home-greeting mb-3">Olá {usuario.nome}!</p>
+          <p className="text-3xl font-bold text-indigo-700 mb-3">
+            Olá {usuario.nome}!
+          </p>
           <CardCobrancaHome
             cobrancas={cobrancas}
             navigate={navigate}

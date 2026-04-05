@@ -11,6 +11,9 @@ import { Pagamentos } from "./features/pagamentos/components/Pagamentos";
 import { Perfil } from "./features/perfil/components/Perfil";
 import { PagamentosEfetivar } from "./features/pagamentos/components/PagamentosEfetivar";
 import { PagamentosComprovante } from "./features/pagamentos/components/PagamentosComprovante";
+import { AdminHome } from "./features/admin/components/AdminHome";
+import { AdminCriarEvento } from "./features/admin/components/AdminCriarEvento";
+import { AdminDeletarEvento } from "./features/admin/components/AdminDeletarEvento";
 
 export const EscolaDancaApp = () => {
   return (
@@ -23,12 +26,16 @@ export const EscolaDancaApp = () => {
           <Route element={<PrivateRoute />}>
             {/* Grupo com PrivateRoute e com BottomNavBar */}
             <Route element={<AppLayout />}>
+              {/* User paths */}
               <Route path={paths.userHome} element={<Home />} />
               <Route path={paths.userAvisos} element={<Avisos />} />
               <Route path={paths.userPagamentos} element={<Pagamentos />} />
-              <Route path={paths.userPerfil} element={<Perfil />} />
+              <Route path={paths.perfil} element={<Perfil />} />
+              {/* Admin paths */}
+              <Route path={paths.adminHome} element={<AdminHome />} />
             </Route>
             {/* Grupo com PrivateRoute sem BottomNavBar */}
+            {/* User paths */}
             <Route
               path={paths.userDetalhesAvisos}
               element={<DetalhesAvisos />}
@@ -40,6 +47,15 @@ export const EscolaDancaApp = () => {
             <Route
               path={paths.userPagamentosComprovante}
               element={<PagamentosComprovante />}
+            />
+            {/* Admin paths */}
+            <Route
+              path={paths.adminCriarEvento}
+              element={<AdminCriarEvento />}
+            />
+            <Route
+              path={paths.adminDeletarEvento}
+              element={<AdminDeletarEvento />}
             />
           </Route>
         </Routes>

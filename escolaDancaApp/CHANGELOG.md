@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [SNAPSHOT]
 
+## [0.0.17] - 04 Abr. 2026
+
+### Added
+
+- Criaçao inicial tela e paths de admin
+
 ## [0.0.16] - 03 Abr. 2026
 
 ### Added

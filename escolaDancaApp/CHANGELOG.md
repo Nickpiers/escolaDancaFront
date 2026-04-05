@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [SNAPSHOT]
 
+## [0.0.18] - 05 Abr. 2026
+
+### Added
+
+- Criaçao inicial tela de criar evento
+- Criaçao inicial tela de deletar evento
+
 ## [0.0.17] - 04 Abr. 2026
 
 ### Added

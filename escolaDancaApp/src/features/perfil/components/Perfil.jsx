@@ -13,7 +13,7 @@ export const Perfil = () => {
   return (
     <>
       <Header />
-      <main className="max-w-[800px] mx-auto p-6 pb-32">
+      <main className="max-w-[800px] mx-auto p-6">
         <div className="flex flex-col items-center mt-8 justify-between">
           <div>
             <img

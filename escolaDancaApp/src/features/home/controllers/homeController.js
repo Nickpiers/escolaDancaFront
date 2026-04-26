@@ -12,3 +12,12 @@ export const filterProximoEvento = (eventosList, idProximoEvento) => {
     eventosList.find((evento) => evento.idEvento === idProximoEvento) || null
   );
 };
+
+export const filterProximaCobranca = (cobrancas) => {
+  const { cobrancasEmAberto, idProximaCobranca } = cobrancas || {};
+  return (
+    cobrancasEmAberto.find(
+      (cobranca) => cobranca.idCobranca === idProximaCobranca,
+    ) || null
+  );
+};

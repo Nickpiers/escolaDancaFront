@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "https://escoladancaback.onrender.com";
 
 export const restRequest = async (endpoint, options = {}) => {
   try {
@@ -16,16 +16,25 @@ export const restRequest = async (endpoint, options = {}) => {
       ...options,
     });
 
-    const json = await response.json();
+    let json = null;
+    if (response.status !== 204) {
+      json = await response.json();
+    }
 
-    if (response.ok && json.status === 200 && json.type === "OK") {
+    if (
+      response.ok &&
+      (response.status === 200 ||
+        response.status === 201 ||
+        response.status === 204 ||
+        (json && json.type === "OK"))
+    ) {
       return {
-        data: json.data,
-        message: json.message,
+        data: json ? json.data : null,
+        message: json ? json.message : "Operação realizada com sucesso",
       };
     }
 
-    const error = new Error(json.message || "Erro desconhecido");
+    const error = new Error(json?.message || "Erro desconhecido");
     error.status = response.status;
 
     if (error.status === 401 || error.message.includes("expired token")) {

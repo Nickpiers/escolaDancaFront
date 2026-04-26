@@ -4,67 +4,96 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
-  const [usuario, setUsuario] = useState(() => localStorage.getItem("usuario"));
-  const [aluno, setAluno] = useState(() => {
-    const storedAluno = localStorage.getItem("aluno");
+  const [tipoUsuario, setTipoUsuario] = useState(() =>
+    localStorage.getItem("tipoUsuario"),
+  );
+  const [usuario, setUsuario] = useState(() => {
+    const storedUsuario = localStorage.getItem("usuario");
     try {
-      return storedAluno ? JSON.parse(storedAluno) : null;
+      return storedUsuario ? JSON.parse(storedUsuario) : null;
     } catch {
       return null;
     }
   });
-  const [eventos, setEventos] = useState(() => {
-    const storedEventos = localStorage.getItem("eventos");
+  const [avisos, setAvisos] = useState(() => {
+    const storedAvisos = localStorage.getItem("avisos");
     try {
-      return storedEventos ? JSON.parse(storedEventos) : null;
+      return storedAvisos ? JSON.parse(storedAvisos) : null;
     } catch {
       return null;
     }
   });
+  const [cobrancas, setCobrancas] = useState(() => {
+    const storedCobrancas = localStorage.getItem("cobrancas");
+    try {
+      return storedCobrancas ? JSON.parse(storedCobrancas) : null;
+    } catch {
+      return null;
+    }
+  });
+  const [avisoSelecionado, setAvisoSelecionado] = useState(null);
+  const [cobrancaSelecionada, setCobrancaSelecionada] = useState(null);
 
   const saveToken = (newToken) => {
     setToken(newToken);
     localStorage.setItem("token", newToken);
   };
 
+  const saveTipoUsuario = (newTipoUsuario) => {
+    setTipoUsuario(newTipoUsuario);
+    localStorage.setItem("tipoUsuario", newTipoUsuario);
+  };
+
   const saveUsuario = (newUsuario) => {
     setUsuario(newUsuario);
-    localStorage.setItem("usuario", newUsuario);
+    localStorage.setItem("usuario", JSON.stringify(newUsuario));
   };
 
-  const saveAluno = (newAluno) => {
-    setAluno(newAluno);
-    localStorage.setItem("aluno", JSON.stringify(newAluno));
+  const saveAvisos = (newAvisos) => {
+    setAvisos(newAvisos);
+    localStorage.setItem("avisos", JSON.stringify(newAvisos));
   };
 
-  const saveEventos = (newEventos) => {
-    setEventos(newEventos);
-    localStorage.setItem("eventos", JSON.stringify(newEventos));
+  const saveCobrancas = (newCobrancas) => {
+    setCobrancas(newCobrancas);
+    localStorage.setItem("cobrancas", JSON.stringify(newCobrancas));
   };
 
   const clearUserData = () => {
     setToken(null);
+    saveTipoUsuario(null);
     setUsuario(null);
-    setAluno(null);
-    setEventos(null);
+    setAvisos(null);
+    setCobrancas(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("tipoUsuario");
     localStorage.removeItem("usuario");
-    localStorage.removeItem("aluno");
-    localStorage.removeItem("eventos");
+    localStorage.removeItem("avisos");
+    localStorage.removeItem("cobrancas");
   };
 
   return (
     <UserContext.Provider
       value={{
+        // Infos Essenciais
         token,
+        tipoUsuario,
         usuario,
-        aluno,
-        eventos,
+        avisos,
+        cobrancas,
         saveToken,
+        saveTipoUsuario,
         saveUsuario,
-        saveAluno,
-        saveEventos,
+        saveAvisos,
+        saveCobrancas,
         clearUserData,
+        // Infos Essenciais
+
+        // Infos Utilitarias
+        avisoSelecionado,
+        setAvisoSelecionado,
+        cobrancaSelecionada,
+        setCobrancaSelecionada,
       }}
     >
       {children}

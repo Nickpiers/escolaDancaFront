@@ -13,7 +13,10 @@ export const Login = () => {
 
   useEffect(() => {
     if (data?.token && !error) {
-      navigate(paths.userHome);
+      const { tipoUsuario } = data;
+      tipoUsuario === "ALUNO"
+        ? navigate(paths.userHome)
+        : navigate(paths.adminHome);
     }
   }, [data, error, navigate]);
 
@@ -47,7 +50,7 @@ export const Login = () => {
         >
           {loading ? "Entrando..." : "Entrar"}
         </button>
-        <button className="login-button register">Registrar</button>
+        {/* <button className="login-button register">Registrar</button> */}
       </div>
     </div>
   );

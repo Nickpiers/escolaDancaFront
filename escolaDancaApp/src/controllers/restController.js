@@ -16,19 +16,25 @@ export const restRequest = async (endpoint, options = {}) => {
       ...options,
     });
 
-    const json = await response.json();
+    let json = null;
+    if (response.status !== 204) {
+      json = await response.json();
+    }
 
     if (
       response.ok &&
-      (json.type === "OK" || [200, 201, 204].includes(json.status))
+      (response.status === 200 ||
+        response.status === 201 ||
+        response.status === 204 ||
+        (json && json.type === "OK"))
     ) {
       return {
-        data: json.data,
-        message: json.message,
+        data: json ? json.data : null,
+        message: json ? json.message : "Operação realizada com sucesso",
       };
     }
 
-    const error = new Error(json.message || "Erro desconhecido");
+    const error = new Error(json?.message || "Erro desconhecido");
     error.status = response.status;
 
     if (error.status === 401 || error.message.includes("expired token")) {

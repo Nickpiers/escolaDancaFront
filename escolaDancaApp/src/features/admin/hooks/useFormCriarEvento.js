@@ -2,9 +2,9 @@ import { useState } from "react";
 
 // prettier-ignore
 import { convertDDMMYYYYToISODate, formatDateWhileTyping, formatTimeWhileTyping, isValidDateDDMMYYYY, isValidTime, normalizeDateOnBlur, normalizeTimeOnBlur } from "../controllers/adminController";
-import { criarEvento } from "../controllers/adminRestController";
+import { criarEvento, listarEventos } from "../controllers/adminRestController";
 
-export const useFormCriarEvento = () => {
+export const useFormCriarEvento = (saveAvisos) => {
   const [form, setForm] = useState({
     nomeEvento: "",
     descricaoEvento: "",
@@ -117,6 +117,9 @@ export const useFormCriarEvento = () => {
 
     try {
       await criarEvento(payload);
+      const { data: eventos } = await listarEventos();
+
+      saveAvisos(eventos);
     } catch (error) {
       console.error("Erro ao criar evento:", error.message);
     }

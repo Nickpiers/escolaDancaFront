@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [SNAPSHOT]
 
+## [0.0.19] - 26 Abr. 2026
+
+### Added
+
+- Criaçao de modal personalizada ao carregar o deletar e criar evento
+- Atualizando eventos pós criaçao ou deleçao de evento
+
 ## [0.0.18] - 05 Abr. 2026
 
 ### Added

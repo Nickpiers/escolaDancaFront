@@ -43,3 +43,16 @@ export const deletarEvento = async ({ idEvento }) => {
     throw new Error(message);
   }
 };
+
+export const listarEventos = async () => {
+  try {
+    const result = await restRequest(`/api/evento/listar`, {
+      method: "GET",
+    });
+
+    return result;
+  } catch (error) {
+    console.error("Erro ao listar eventos:", error.message);
+    throw new Error("Erro inesperado. Tente novamente mais tarde.");
+  }
+};

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { deletarEvento } from "../controllers/adminRestController";
+// prettier-ignore
+import { deletarEvento, listarEventos } from "../controllers/adminRestController";
 
-export const useDeletarEventos = (eventosList, avisos, saveAvisos) => {
+export const useDeletarEventos = (eventosList, saveAvisos) => {
   const [items, setItems] = useState(eventosList);
   const [deleting, setDeleting] = useState(null);
   const [loadingId, setLoadingId] = useState(null);
@@ -23,20 +24,10 @@ export const useDeletarEventos = (eventosList, avisos, saveAvisos) => {
     setError("");
 
     try {
-      const res = await deletarEvento({ idEvento: deleting.idEvento });
-
-      if (!res.ok) {
-        const text = await res.text().catch(() => "");
-        throw new Error(text || "Erro ao deletar evento");
-      }
-
-      const newItems = items.filter((it) => it.idEvento !== deleting.idEvento);
-      setItems(newItems);
-
-      const newAvisos = { ...(avisos || {}), eventos: newItems };
-      if (typeof saveAvisos === "function") {
-        saveAvisos(newAvisos);
-      }
+      await deletarEvento({ idEvento: deleting.idEvento });
+      const { data } = await listarEventos();
+      saveAvisos(data.eventos);
+      setItems(data.eventos);
 
       setLoadingId(null);
       closeConfirm();

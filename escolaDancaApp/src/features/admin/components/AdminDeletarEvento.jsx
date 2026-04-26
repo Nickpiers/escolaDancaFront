@@ -8,6 +8,8 @@ import { formatarDataCompleta } from "../../../controllers/commonController";
 import { ModalConfirmarDeletarEvento } from "./ModalConfirmarDeletarEvento";
 import { TelaNenhumEvento } from "./TelaNenhumEvento";
 import { useDeletarEventos } from "../hooks/useDeletarEventos";
+import { useState } from "react";
+import { ModalStatusEvento } from "./ModalEventoCriadoDeletado";
 
 export const AdminDeletarEvento = () => {
   const navigate = useNavigate();
@@ -22,7 +24,21 @@ export const AdminDeletarEvento = () => {
     handleDelete,
     closeConfirm,
     openConfirm,
-  } = useDeletarEventos(eventosList, avisos, saveAvisos);
+  } = useDeletarEventos(eventosList, saveAvisos);
+
+  const [statusModal, setStatusModal] = useState(null);
+
+  const handleDeleteWithStatus = async () => {
+    try {
+      setStatusModal("loading");
+      await handleDelete();
+      setStatusModal("sucesso");
+    } catch (err) {
+      setStatusModal("erro" + err.message);
+    }
+  };
+
+  const closeStatusModal = () => setStatusModal(null);
 
   if (!items || items.length === 0) {
     return <TelaNenhumEvento navigate={navigate} />;
@@ -72,7 +88,16 @@ export const AdminDeletarEvento = () => {
             deleting={deleting}
             error={error}
             loadingId={loadingId}
-            handleDelete={handleDelete}
+            handleDelete={handleDeleteWithStatus}
+          />
+        )}
+
+        {statusModal && (
+          <ModalStatusEvento
+            tipo="delecao"
+            status={statusModal}
+            mensagemErro={error}
+            closeModal={closeStatusModal}
           />
         )}
       </main>

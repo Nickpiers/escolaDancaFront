@@ -2,8 +2,12 @@ import { Header } from "../../common/components/Header";
 // prettier-ignore
 import { CalendarDaysIcon, ClockIcon, MapPinIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import { useFormCriarEvento } from "../hooks/useFormCriarEvento";
+import { useUser } from "../../../UserContext";
+import { ModalStatusEvento } from "./ModalEventoCriadoDeletado";
+import { useState } from "react";
 
 export const AdminCriarEvento = () => {
+  const { saveAvisos } = useUser();
   const {
     form,
     errors,
@@ -12,7 +16,27 @@ export const AdminCriarEvento = () => {
     handleDateBlur,
     validateRequiredText,
     handleSubmit,
-  } = useFormCriarEvento();
+  } = useFormCriarEvento(saveAvisos);
+
+  const [statusModal, setStatusModal] = useState(null);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleSubmitWithStatus = async (e) => {
+    e.preventDefault();
+    try {
+      setStatusModal("loading");
+      await handleSubmit(e);
+      setStatusModal("sucesso");
+    } catch (err) {
+      setErrorMsg(err.message || "Não foi possível criar o evento.");
+      setStatusModal("erro");
+    }
+  };
+
+  const closeStatusModal = () => {
+    setStatusModal(null);
+    setErrorMsg("");
+  };
 
   return (
     <>
@@ -21,7 +45,7 @@ export const AdminCriarEvento = () => {
         <h1 className="text-2xl font-bold mb-6">Criar Novo Evento</h1>
 
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmitWithStatus}
           className="bg-white shadow-md rounded-lg p-6 space-y-5"
         >
           <div>
@@ -145,6 +169,14 @@ export const AdminCriarEvento = () => {
             Criar Evento
           </button>
         </form>
+        {statusModal && (
+          <ModalStatusEvento
+            tipo="criar"
+            status={statusModal}
+            mensagemErro={errorMsg}
+            closeModal={closeStatusModal}
+          />
+        )}
       </main>
     </>
   );

@@ -1,4 +1,4 @@
-const BASE_URL = "https://escoladancaback.onrender.com";
+const BASE_URL = "http://localhost:8080";
 
 export const restRequest = async (endpoint, options = {}) => {
   try {

@@ -2,7 +2,7 @@ import { useState } from "react";
 // prettier-ignore
 import { deletarEvento, listarEventos } from "../controllers/adminRestController";
 
-export const useDeletarEventos = (eventosList, saveAvisos) => {
+export const useDeletarEventos = (eventosList, saveAvisos, avisos) => {
   const [items, setItems] = useState(eventosList);
   const [deleting, setDeleting] = useState(null);
   const [loadingId, setLoadingId] = useState(null);
@@ -26,7 +26,7 @@ export const useDeletarEventos = (eventosList, saveAvisos) => {
     try {
       await deletarEvento({ idEvento: deleting.idEvento });
       const { data } = await listarEventos();
-      saveAvisos(data.eventos);
+      saveAvisos({ ...avisos, eventos: data.eventos });
       setItems(data.eventos);
 
       setLoadingId(null);

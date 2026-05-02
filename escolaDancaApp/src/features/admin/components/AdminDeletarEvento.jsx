@@ -24,7 +24,7 @@ export const AdminDeletarEvento = () => {
     handleDelete,
     closeConfirm,
     openConfirm,
-  } = useDeletarEventos(eventosList, saveAvisos);
+  } = useDeletarEventos(eventosList, saveAvisos, avisos);
 
   const [statusModal, setStatusModal] = useState(null);
 

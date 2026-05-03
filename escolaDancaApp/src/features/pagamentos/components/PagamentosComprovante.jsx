@@ -3,6 +3,7 @@ import { formatarDataCompleta, formataValor, mascararCPF } from "../../../contro
 import { useUser } from "../../../UserContext";
 import { Card } from "../../common/components/Card";
 import { Header } from "../../common/components/Header";
+import { baixarComprovante } from "../controller/restPagamentosController";
 
 export const PagamentosComprovante = () => {
   const { usuario, cobrancaSelecionada } = useUser();
@@ -13,6 +14,21 @@ export const PagamentosComprovante = () => {
       <span className="text-gray-600">{valor}</span>
     </div>
   );
+
+  const aoBaixarComprovante = async () => {
+    try {
+      await baixarComprovante({
+        cpf: mascararCPF(usuario.cpf),
+        nome: usuario.nome,
+        email: usuario.email,
+        valorTotal: formataValor(cobrancaSelecionada.totalCobranca),
+        valorPago: formataValor(cobrancaSelecionada.totalPago),
+        dataPagamento: formatarDataCompleta(cobrancaSelecionada.vencimento),
+      });
+    } catch (error) {
+      console.error("Erro ao baixar comprovante:", error.message);
+    }
+  };
 
   return (
     <>
@@ -48,6 +64,7 @@ export const PagamentosComprovante = () => {
         <div className="max-w-[800px] mx-auto mb-12 px-6">
           <button
             type="button"
+            onClick={aoBaixarComprovante}
             className="w-full py-3 rounded-2xl bg-green-800 text-white text-lg font-semibold shadow-lg"
           >
             Baixar Comprovante

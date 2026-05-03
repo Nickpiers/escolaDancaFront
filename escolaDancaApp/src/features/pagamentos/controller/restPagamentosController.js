@@ -1,4 +1,4 @@
-import { restRequest } from "../../../controllers/restController";
+import { BASE_URL, restRequest } from "../../../controllers/restController";
 
 export const pagarCobranca = async ({ idCobranca }) => {
   try {
@@ -28,5 +28,49 @@ export const listarCobrancas = async ({ idUsuario }) => {
   } catch (error) {
     console.error("Erro ao listar cobrancas:", error.message);
     throw new Error("Erro inesperado. Tente novamente mais tarde.");
+  }
+};
+
+export const baixarComprovante = async ({
+  cpf,
+  nome,
+  email,
+  valorTotal,
+  valorPago,
+  dataPagamento,
+}) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${BASE_URL}/api/cobranca/comprovante`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      body: JSON.stringify({
+        cpf,
+        nome,
+        email,
+        valorTotal,
+        valorPago,
+        dataPagamento,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao baixar comprovante");
+    }
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `comprovante.pdf`;
+    a.click();
+    a.remove();
+  } catch (error) {
+    console.error("Erro ao baixar comprovante:", error.message);
+    throw error;
   }
 };
